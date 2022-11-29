@@ -53,8 +53,8 @@ with handsModule.Hands(static_image_mode=False, min_detection_confidence=0.7, mi
                 if pixelCoordinatesLandmark in line:
                     line.remove(pixelCoordinatesLandmark)
             
-            for i in line:
-                cv2.circle(frame, i, 2, (255,0,0), -1)
+        for i in line:
+            cv2.circle(frame, i, 2, (255,0,0), -1)
             
         cv2.imshow('Test image', frame)
  
