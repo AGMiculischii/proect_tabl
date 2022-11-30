@@ -25,7 +25,8 @@ with handsModule.Hands(static_image_mode=False, min_detection_confidence=0.7, mi
         frame = cv2.flip(frame, 1)
  
         results = hands.process(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-
+#        circleColor = (0, 0, 0)
+ 
         if results.multi_hand_landmarks != None:
  
             normalizedLandmark = results.multi_hand_landmarks[0].landmark[handsModule.HandLandmark.INDEX_FINGER_TIP]
@@ -44,18 +45,20 @@ with handsModule.Hands(static_image_mode=False, min_detection_confidence=0.7, mi
                                                                                       normalizedLandmark2.y,
                                                                                       frameWidth,
                                                                                       frameHeight)
-            
+
             cv2.circle(frame, pixelCoordinatesLandmark, 2, (255,0,0), -1)
 
             if distanceModule.euclidean(pixelCoordinatesLandmark, pixelCoordinatesLandmark1) > 50:
                 line.append(pixelCoordinatesLandmark)
             if distanceModule.euclidean(pixelCoordinatesLandmark, pixelCoordinatesLandmark2) < 70:
-                if pixelCoordinatesLandmark in line:
-                    line.remove(pixelCoordinatesLandmark)
-            
+                for t in line:
+                    if distanceModule.euclidean(pixelCoordinatesLandmark, t) < 10:
+                        line.remove(t)
+
         for i in line:
             cv2.circle(frame, i, 2, (255,0,0), -1)
             
+ 
         cv2.imshow('Test image', frame)
  
         if cv2.waitKey(1) == 27:
