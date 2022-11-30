@@ -47,9 +47,9 @@ with handsModule.Hands(static_image_mode=False, min_detection_confidence=0.7, mi
             
             cv2.circle(frame, pixelCoordinatesLandmark, 2, (255,0,0), -1)
 
-            if distanceModule.euclidean(pixelCoordinatesLandmark, pixelCoordinatesLandmark1) > 40:
+            if distanceModule.euclidean(pixelCoordinatesLandmark, pixelCoordinatesLandmark1) > 50:
                 line.append(pixelCoordinatesLandmark)
-            if distanceModule.euclidean(pixelCoordinatesLandmark, pixelCoordinatesLandmark2) < 60:
+            if distanceModule.euclidean(pixelCoordinatesLandmark, pixelCoordinatesLandmark2) < 70:
                 if pixelCoordinatesLandmark in line:
                     line.remove(pixelCoordinatesLandmark)
             
